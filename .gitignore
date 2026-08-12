@@ -1,0 +1,97 @@
+# ---------------------------------------------------------------
+# Secrets — NEVER commit these.
+# If a key is committed by accident, rotate it. Deleting the commit
+# is not sufficient; it stays in the reflog and in every clone.
+# ---------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials.json
+
+# ---------------------------------------------------------------
+# Python / FastAPI backend
+# ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# ---------------------------------------------------------------
+# Node / React frontend
+# ---------------------------------------------------------------
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------------------------------------------------------------
+# Database and data
+# ---------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+pgdata/
+postgres-data/
+
+# Generated Synthea output — regenerate, do not commit.
+# Commit the generator config and the seed instead.
+eval/datasets/synthea/output/
+eval/datasets/*.csv
+eval/datasets/*.parquet
+
+# Eval run outputs — commit summary tables in Markdown, not raw dumps
+eval/results/raw/
+
+# Real patient data must never enter this repository under any
+# circumstance. This is a backstop, not a policy.
+**/phi/
+**/real-patient-data/
+
+# ---------------------------------------------------------------
+# Editors and OS
+# ---------------------------------------------------------------
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------------------------------------------------------------
+# Logs and scratch
+# ---------------------------------------------------------------
+*.log
+logs/
+tmp/
+scratch/
