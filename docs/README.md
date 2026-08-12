@@ -5,6 +5,7 @@
 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | System design, all diagrams, component spec, graph state, data model |
 | [`IMPLEMENTATION_PLAN.md`](IMPLEMENTATION_PLAN.md) | Stack decisions, six-phase schedule, evaluation plan, scope boundaries, risks |
 | [`LLM_PROVIDER_STRATEGY.md`](LLM_PROVIDER_STRATEGY.md) | Free vs. paid models, tiered routing, cost estimates, provider-agnostic setup |
+| [`TESTING_STRATEGY.md`](TESTING_STRATEGY.md) | Tests vs. evaluations, what to test at each layer, the three-day setup list |
 | [`project-proposal.pdf`](project-proposal.pdf) | The submitted abstract — original filename `FINAL YEAR PROJECT.pdf` |
 | [`decisions/`](decisions/) | Short records of non-obvious architectural choices |
 | [`diagrams/`](diagrams/) | Diagram sources, including the superseded v1 Lucidchart export |

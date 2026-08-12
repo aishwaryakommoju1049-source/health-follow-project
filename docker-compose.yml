@@ -1,0 +1,46 @@
+# Local development services.
+#
+#   docker compose up -d db db-test
+#
+# Two databases on purpose: the test database is wiped by the suite, so it must
+# never be the one holding your development data.
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: mediagent-db
+    environment:
+      POSTGRES_USER: mediagent
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: mediagent
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mediagent -d mediagent"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  db-test:
+    image: pgvector/pgvector:pg16
+    container_name: mediagent-db-test
+    environment:
+      POSTGRES_USER: mediagent
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: mediagent_test
+    ports:
+      - "5433:5432"
+    # No volume: the test database is disposable by design. Recreating the
+    # container gives you a clean slate.
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mediagent -d mediagent_test"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:

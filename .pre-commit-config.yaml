@@ -1,0 +1,49 @@
+# Install once per clone:
+#
+#   pip install pre-commit
+#   pre-commit install
+#
+# The secret scanner is first on purpose. Four people, a live API key and a
+# pushed repository — a hook that blocks the commit is worth more than any
+# test in this project. A leaked key must be rotated; deleting the commit is
+# not enough, it stays in the reflog and in every clone.
+
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+        args: [--maxkb=2048]
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-toml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: detect-private-key
+      - id: no-commit-to-branch
+        args: [--branch, main]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      - id: ruff
+        args: [--fix]
+        files: ^backend/
+      - id: ruff-format
+        files: ^backend/
+
+  - repo: local
+    hooks:
+      - id: no-env-files
+        name: block .env files
+        entry: .env must never be committed - it holds API keys
+        language: fail
+        files: '(^|/)\.env($|\..*)'
+        exclude: '\.env\.example$'

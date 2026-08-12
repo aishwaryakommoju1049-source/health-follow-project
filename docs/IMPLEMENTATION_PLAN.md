@@ -172,6 +172,8 @@ Sequenced so you have a demonstrable system at every review, not only at the end
 ### Phase 2 — The non-AI spine
 **Sep → mid Oct 2026 · 4 weeks**
 
+- **First three days: test harness and CI** — see [`TESTING_STRATEGY.md`](TESTING_STRATEGY.md) §4.
+  Timeboxed. Includes the `gitleaks` pre-commit hook and the red-flag vignette suite.
 - Doctor: register a patient, create a care plan, prescribe, set follow-up cadence
 - Patient: view prescriptions, log symptoms via form, mark doses taken
 - Scheduler firing dose reminders and overdue check-in alerts

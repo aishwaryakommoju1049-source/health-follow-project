@@ -1,0 +1,25 @@
+# Runtime dependencies.
+# Loose lower bounds during Phase 1-2; pin exactly before the final submission
+# so the demo cannot break under you.
+
+fastapi>=0.115
+uvicorn[standard]>=0.32
+
+pydantic>=2.9
+pydantic-settings>=2.6
+
+sqlalchemy>=2.0
+psycopg[binary]>=3.2
+alembic>=1.14
+
+# Auth (Phase 1)
+python-jose[cryptography]>=3.3
+passlib[bcrypt]>=1.7
+
+# Scheduling (Phase 2)
+apscheduler>=3.10
+
+# Orchestration and vector search arrive in Phase 3-4:
+#   langgraph
+#   langgraph-checkpoint-postgres
+#   pgvector

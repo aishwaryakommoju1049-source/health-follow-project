@@ -73,17 +73,30 @@ Document any new variable here in the same PR that introduces it.
 
 ## Local setup
 
-Once `docker-compose.yml` and `requirements.txt` exist (Phase 1):
-
 ```bash
-docker compose up -d db
-python -m venv .venv && .venv\Scripts\activate
-pip install -r requirements.txt
-alembic upgrade head
+python -m venv .venv && .venv/Scripts/activate
+pip install -r requirements-dev.txt
+pre-commit install
+docker compose -f ../docker-compose.yml up -d db db-test
+cp .env.example .env
 uvicorn app.main:app --reload
 ```
 
 API docs at `http://localhost:8000/docs`.
+
+## Tests
+
+```bash
+pytest                      # everything
+pytest -m safety            # red-flag vignettes only, no database needed
+ruff check . && mypy        # what CI gates on
+```
+
+The suite runs without Postgres — database-backed tests skip with a clear message locally, and
+fail in CI where the service container is guaranteed. No test calls a real model API: the
+`stub_llm` fixture is `autouse`, so an unstubbed call fails rather than spending money.
+
+Full rationale in [`../docs/TESTING_STRATEGY.md`](../docs/TESTING_STRATEGY.md).
 
 ---
 
